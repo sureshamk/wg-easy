@@ -1,10 +1,28 @@
 version: "3.8"
 services:
   wg-easy:
-    image: wg-easy
-    command: npm run serve
-    volumes:
-      - ./src/:/app/
+    image: sureshamk/wg-easy:ipv6
+    # command: npm run serve
+    # volumes:
+    #   - ./src/:/app/
     environment: 
       # - PASSWORD=p
       - WG_HOST=192.168.1.233
+    privileged: true # for podman issues
+    volumes:
+      - .:/etc/wireguard
+    platform: linux/amd64  
+    ports:
+      - "51830:51820/udp"
+      - "51821:51821/tcp"
+    restart: unless-stopped
+    # cap_add:
+    #   - NET_ADMIN
+    #   - SYS_MODULE
+    # sysctls:
+    #   - net.ipv4.ip_forward=1
+    #   - net.ipv4.conf.all.src_valid_mark=1
+    #   - net.ipv6.conf.all.disable_ipv6=0
+    #   - net.ipv6.conf.all.forwarding=1
+    #   - net.ipv6.conf.default.forwarding=1
+    #   - net.ipv6.conf.eth0.proxy_ndp=1
