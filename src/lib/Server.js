@@ -90,7 +90,7 @@ module.exports = class Server {
         return WireGuard.getClients();
       }))
       .get('/api/wireguard/getClient', Util.promisify(async req => {
-        return WireGuard.getClientData({ clientId });
+        return WireGuard.getClientData({ });
       }))
       .get('/api/wireguard/client/:clientId/qrcode.svg', Util.promisify(async (req, res) => {
         const { clientId } = req.params;
@@ -153,6 +153,7 @@ module.exports = class Server {
       }))
 
       .listen(PORT, () => {
+        // eslint-disable-next-line no-console
         console.info(`Listening on http://127.0.0.1:${PORT}`);
       });
   }

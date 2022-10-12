@@ -87,11 +87,11 @@ module.exports = class WireGuard {
   }
 
   async __saveConfig(config, ifPublicKeyExists) {
-
-    let serverIPAddress = `${config.server.addressIPv4}, ${config.server.addressIPv6}`
-    console.log(WG_DISABLE_ADDRESS_IPV4)
-    if(WG_DISABLE_ADDRESS_IPV4){
-      serverIPAddress = `${config.server.addressIPv6}`
+    let serverIPAddress = `${config.server.addressIPv4}, ${config.server.addressIPv6}`;
+    // eslint-disable-next-line no-console
+    console.log(WG_DISABLE_ADDRESS_IPV4);
+    if (WG_DISABLE_ADDRESS_IPV4) {
+      serverIPAddress = `${config.server.addressIPv6}`;
     }
 
     let result = `
@@ -112,20 +112,20 @@ PostDown = ${WG_POST_DOWN}
     for (const [clientId, client] of Object.entries(config.clients)) {
       if (!client.enabled) continue;
 
-      let clientIpAddess =`${client.addressIPv4}, ${client.addressIPv6}`;
+      let clientIpAddess = `${client.addressIPv4}, ${client.addressIPv6}`;
 
-      if(WG_DISABLE_ADDRESS_IPV4){
-        clientIpAddess = `${config.server.addressIPv6}`
-      }     
+      if (WG_DISABLE_ADDRESS_IPV4) {
+        clientIpAddess = `${config.server.addressIPv6}`;
+      }
 
       if (ifPublicKeyExists) {
-  result += `
+        result += `
 # Client: ${client.name} (${clientId})
 [Peer]
 PublicKey = ${client.publicKey}
 AllowedIPs = ${clientIpAddess}`;
-} else {
-result += `
+      } else {
+        result += `
 
 # Client: ${client.name} (${clientId})
 [Peer]
@@ -133,16 +133,7 @@ PublicKey = ${client.publicKey}
 PresharedKey = ${client.preSharedKey}
 AllowedIPs = ${clientIpAddess}`;
       }
-}
-
-
-
-
-
-
-
-
-
+    }
 
     debug('Config saving...');
     await fs.writeFile(path.join(WG_PATH, 'wg0.json'), JSON.stringify(config, false, 2), {
@@ -260,8 +251,6 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
   }
 
   async createClient({ name, publicKey = null, allowedIp }) {
-
-
     if (!name) {
       throw new Error('Missing: Name');
     }
@@ -280,9 +269,6 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
       ifPublicKeyExists = false;
 
       privateKey = await Util.exec('wg genkey');
-
-      console.log(privateKey,"==========")
-
 
       publicKey = await Util.exec(`echo ${privateKey} | wg pubkey`);
       preSharedKey = await Util.exec('wg genpsk');
@@ -341,7 +327,7 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
       updatedAt: new Date(),
 
       enabled: true,
-      ...client
+      ...client,
     };
 
     config.clients[clientId] = client;
@@ -387,16 +373,14 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
     await this.saveConfig();
   }
 
-
   async updateClientPublicKey({ clientId, publicKey }) {
     const client = await this.getClient({ clientId });
-    const ifPublicKeyExists = publicKey ? true : false;
+    const ifPublicKeyExists = !!publicKey;
     client.publicKey = publicKey;
     client.updatedAt = new Date();
-    //send public key
+    // send public key
     await this.saveConfig(ifPublicKeyExists);
   }
-
 
   async updateClientAddressIPv4({ clientId, addressIPv4 }) {
     const client = await this.getClient({ clientId });
