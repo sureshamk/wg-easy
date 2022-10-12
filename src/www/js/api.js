@@ -72,11 +72,11 @@ class API {
     })));
   }
 
-  async createClient({ name }) {
+  async createClient({ name, publicKey }) {
     return this.call({
       method: 'post',
       path: '/wireguard/client',
-      body: { name },
+      body: { name, publicKey },
     });
   }
 
@@ -101,11 +101,11 @@ class API {
     });
   }
 
-  async updateClientName({ clientId, name }) {
+  async updateClientName({ clientId, publicKey }) {
     return this.call({
       method: 'put',
       path: `/wireguard/client/${clientId}/name/`,
-      body: { name },
+      body: { publicKey },
     });
   }
 

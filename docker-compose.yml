@@ -1,10 +1,10 @@
-version: "3.8"
+version: "3.3"
 services:
   wg-easy:
     environment:
       # ⚠️ Required:
       # Change this to your host's public address
-      - WG_HOST=raspberrypi.local
+      - WG_HOST=0.0.0.0
 
       # Optional:
       # - PASSWORD=foobar123
@@ -18,10 +18,10 @@ services:
       # - WG_PRE_DOWN=echo "Pre Down" > /etc/wireguard/pre-down.txt
       # - WG_POST_DOWN=echo "Post Down" > /etc/wireguard/post-down.txt
       
-    image: weejewel/wg-easy
+    image: wg-easy-pubKey
     container_name: wg-easy
     volumes:
-      - .:/etc/wireguard
+      - ./:/etc/wireguard
     ports:
       - "51820:51820/udp"
       - "51821:51821/tcp"
