@@ -113,9 +113,8 @@ PostDown = ${WG_POST_DOWN}
       if (!client.enabled) continue;
 
       let clientIpAddess = `${client.addressIPv4}, ${client.addressIPv6}`;
-
       if (WG_DISABLE_ADDRESS_IPV4) {
-        clientIpAddess = `${config.server.addressIPv6}`;
+        clientIpAddess = `${client.addressIPv6}`;
       }
 
       if (ifPublicKeyExists) {
@@ -320,7 +319,7 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
       addressIPv4,
       addressIPv6,
       privateKey,
-      // publicKey,
+      publicKey,
       preSharedKey,
 
       createdAt: new Date(),
