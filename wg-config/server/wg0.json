@@ -1,0 +1,32 @@
+{
+  "server": {
+    "privateKey": "kKcCnaNPF8Dj6Vonzf3zdmiDyW0LjqYe8h3dvvATqnI=",
+    "publicKey": "HHIa2OO0o8kIL6MMranrvUxzBPMa8+X0dC29iOvxHhA=",
+    "addressIPv4": "10.8.0.1",
+    "addressIPv6": "fd42:42:42::1"
+  },
+  "clients": {
+    "099f695f-3195-45e0-9e9c-06970b897448": {
+      "name": "demo",
+      "addressIPv4": "10.8.0.2",
+      "addressIPv6": "fd42:42:42::2",
+      "privateKey": "mG6J/3+fyBsZbOO0w6fRugoozyHVGNup4b6OCW3GJ14=",
+      "publicKey": "lNvqTjQPHKIkALl2aiQwCNSYN2cLgzJJtaHFTUmzrzw=",
+      "preSharedKey": "1tDNkH+04qicHjiDsgcab5TrwjfoVyNjhvtRJ4FXpvw=",
+      "createdAt": "2022-09-21T05:17:58.342Z",
+      "updatedAt": "2022-09-21T05:17:58.342Z",
+      "enabled": true
+    },
+    "a7cf6a41-0384-42ac-976b-d11e72684e86": {
+      "name": "demo2",
+      "addressIPv4": "10.8.0.3",
+      "addressIPv6": "fd42:42:42::3",
+      "privateKey": "kG2q+qbeE6Biz1v0T9Kfo7WGc6lNseNM2YorsqJVEn4=",
+      "publicKey": "4r49K4S8D8mALHEYqUWbVVL359lT/cBbmKiKgDFRkjs=",
+      "preSharedKey": "NX454LeQcT9MPgoiSTqqIfHHku+zQPbrRVxhYnHCxng=",
+      "createdAt": "2022-09-21T05:18:04.309Z",
+      "updatedAt": "2022-09-21T05:18:04.309Z",
+      "enabled": true
+    }
+  }
+}
