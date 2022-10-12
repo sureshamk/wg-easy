@@ -16,10 +16,6 @@ const {
   PASSWORD,
 } = require('../config');
 
-console.log('changeeee       -------- CHANGE');
-console.log('HEYYYY');
-
-
 module.exports = class Server {
 
   constructor() {
@@ -157,7 +153,7 @@ module.exports = class Server {
       }))
 
       .listen(PORT, () => {
-        debug(`Listening on http://127.0.0.1:${PORT}`);
+        console.info(`Listening on http://127.0.0.1:${PORT}`);
       });
   }
 
