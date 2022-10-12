@@ -72,11 +72,11 @@ class API {
     })));
   }
 
-  async createClient({ name, publicKey }) {
+  async createClient({ name }) {
     return this.call({
       method: 'post',
       path: '/wireguard/client',
-      body: { name, publicKey },
+      body: { name },
     });
   }
 
