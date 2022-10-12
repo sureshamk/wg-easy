@@ -16,6 +16,10 @@ const {
   PASSWORD,
 } = require('../config');
 
+console.log('changeeee       -------- CHANGE');
+console.log('HEYYYY');
+
+
 module.exports = class Server {
 
   constructor() {
@@ -89,6 +93,9 @@ module.exports = class Server {
       .get('/api/wireguard/client', Util.promisify(async req => {
         return WireGuard.getClients();
       }))
+      .get('/api/wireguard/getClient', Util.promisify(async req => {
+        return WireGuard.getClientData({ clientId });
+      }))
       .get('/api/wireguard/client/:clientId/qrcode.svg', Util.promisify(async (req, res) => {
         const { clientId } = req.params;
         const svg = await WireGuard.getClientQRCodeSVG({ clientId });
@@ -112,6 +119,10 @@ module.exports = class Server {
         const { name } = req.body;
         return WireGuard.createClient({ name });
       }))
+      .post('/api/wireguard/pubKey/client', Util.promisify(async req => {
+        const { name, publicKey, allowedIp } = req.body;
+        return WireGuard.createClient({ name, publicKey, allowedIp });
+      }))
       .delete('/api/wireguard/client/:clientId', Util.promisify(async req => {
         const { clientId } = req.params;
         return WireGuard.deleteClient({ clientId });
@@ -128,6 +139,11 @@ module.exports = class Server {
         const { clientId } = req.params;
         const { name } = req.body;
         return WireGuard.updateClientName({ clientId, name });
+      }))
+      .put('/api/wireguard/client/:clientId/pubKey', Util.promisify(async req => {
+        const { clientId } = req.params;
+        const { publicKey } = req.body;
+        return WireGuard.updateClientPublicKey({ clientId, publicKey });
       }))
       .put('/api/wireguard/client/:clientId/addressIPv4', Util.promisify(async req => {
         const { clientId } = req.params;
