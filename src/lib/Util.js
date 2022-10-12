@@ -63,6 +63,9 @@ module.exports = class Util {
       console.log(`$ ${cmd}`);
     }
 
+    // if ( cmd!="wg genkey"){
+    //   return '';
+    // }
     if (process.platform !== 'linux') {
       return '';
     }

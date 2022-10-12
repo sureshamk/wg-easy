@@ -6,10 +6,12 @@ module.exports.RELEASE = release;
 module.exports.PORT = process.env.PORT || 51821;
 module.exports.PASSWORD = process.env.PASSWORD;
 module.exports.WG_PATH = process.env.WG_PATH || '/etc/wireguard/';
-module.exports.WG_HOST = process.env.WG_HOST;
+module.exports.WG_HOST = process.env.WG_HOST || '0.0.0.0';
 module.exports.WG_PORT = process.env.WG_PORT || 51820;
 module.exports.WG_MTU = process.env.WG_MTU || null;
 module.exports.WG_PERSISTENT_KEEPALIVE = process.env.WG_PERSISTENT_KEEPALIVE || 0;
+module.exports.WG_DISABLE_PRESHAREDKEY = process.env.WG_DISABLE_PRESHAREDKEY === '1';
+module.exports.WG_DISABLE_ADDRESS_IPV4 = process.env.WG_DISABLE_ADDRESS_IPV4 === '1';
 module.exports.WG_DEFAULT_ADDRESS_IPV4 = process.env.WG_DEFAULT_ADDRESS_IPV4 || '10.8.0.x';
 module.exports.WG_DEFAULT_ADDRESS_IPV6 = process.env.WG_DEFAULT_ADDRESS_IPV6 || 'fd42:42:42::x';
 module.exports.WG_DEFAULT_DNS = typeof process.env.WG_DEFAULT_DNS === 'string'
