@@ -63,12 +63,12 @@ module.exports = class Util {
       console.log(`$ ${cmd}`);
     }
 
-    if (cmd !== 'wg genkey' && process.platform !== 'linux') {
-      return '';
-    }
-    // if (process.platform !== 'linux') {
+    // if (cmd !== 'wg genkey' && process.platform !== 'linux') {
     //   return '';
     // }
+    if (process.platform !== 'linux') {
+      return '';
+    }
 
     return new Promise((resolve, reject) => {
       childProcess.exec(cmd, {
