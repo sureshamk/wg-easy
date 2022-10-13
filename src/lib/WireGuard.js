@@ -21,10 +21,7 @@ const {
   WG_DEFAULT_ADDRESS_IPV6,
   WG_PERSISTENT_KEEPALIVE,
   WG_ALLOWED_IPS,
-  WG_PRE_UP,
-  WG_POST_UP,
-  WG_PRE_DOWN,
-  WG_POST_DOWN,
+  WG_COMMANDS,
 } = require('../config');
 
 module.exports = class WireGuard {
@@ -103,10 +100,7 @@ module.exports = class WireGuard {
 PrivateKey = ${config.server.privateKey}
 Address = ${serverIPAddress}
 ListenPort = 51820
-PreUp = ${WG_PRE_UP}
-PostUp = ${WG_POST_UP}
-PreDown = ${WG_PRE_DOWN}
-PostDown = ${WG_POST_DOWN}
+${WG_COMMANDS}
 `;
 
     for (const [clientId, client] of Object.entries(config.clients)) {
@@ -122,15 +116,14 @@ PostDown = ${WG_POST_DOWN}
 # Client: ${client.name} (${clientId})
 [Peer]
 PublicKey = ${client.publicKey}
-AllowedIPs = ${clientIpAddess}`;
+AllowedIPs = ${clientIpAddess.replace('undefined,', '')}`;
       } else {
         result += `
 
 # Client: ${client.name} (${clientId})
 [Peer]
 PublicKey = ${client.publicKey}
-PresharedKey = ${client.preSharedKey}
-AllowedIPs = ${clientIpAddess}`;
+AllowedIPs = ${clientIpAddess.replace('undefined,', '')}`;
       }
     }
 

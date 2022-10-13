@@ -2,6 +2,10 @@
 
 const { release } = require('./package.json');
 
+require('dotenv').config();
+
+console.log(process.env); // remove this after you've confirmed it is working
+
 module.exports.RELEASE = release;
 module.exports.PORT = process.env.PORT || 51821;
 module.exports.PASSWORD = process.env.PASSWORD;
@@ -33,3 +37,4 @@ ip6tables -A FORWARD -o wg0 -j ACCEPT;
 
 module.exports.WG_PRE_DOWN = process.env.WG_PRE_DOWN || '';
 module.exports.WG_POST_DOWN = process.env.WG_POST_DOWN || '';
+module.exports.WG_COMMANDS = process.env.WG_COMMANDS || '';
