@@ -228,7 +228,6 @@ ${WG_MTU ? `MTU = ${WG_MTU}` : ''}
 
 [Peer]
 PublicKey = ${config.server.publicKey}
-PresharedKey = ${client.preSharedKey}
 AllowedIPs = ${WG_ALLOWED_IPS}
 PersistentKeepalive = ${WG_PERSISTENT_KEEPALIVE}
 Endpoint = ${WG_HOST}:${WG_PORT}`;
@@ -253,7 +252,7 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
     let addressIPv4;
     let addressIPv6;
     let privateKey;
-    let preSharedKey;
+    // let preSharedKey;
     let receivedPubKey;
     let client = {};
 
@@ -263,7 +262,7 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
       privateKey = await Util.exec('wg genkey');
 
       publicKey = await Util.exec(`echo ${privateKey} | wg pubkey`);
-      preSharedKey = await Util.exec('wg genpsk');
+      // preSharedKey = await Util.exec('wg genpsk');
 
       // Calculate next IPv4
 
@@ -313,7 +312,7 @@ Endpoint = ${WG_HOST}:${WG_PORT}`;
       addressIPv6,
       privateKey,
       publicKey,
-      preSharedKey,
+      // preSharedKey,
 
       createdAt: new Date(),
       updatedAt: new Date(),
