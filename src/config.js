@@ -1,8 +1,10 @@
 'use strict';
 
 const { release } = require('./package.json');
-
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({
+  path: path.join(__dirname, './.env')
+});
 
 console.log(process.env); // remove this after you've confirmed it is working
 
